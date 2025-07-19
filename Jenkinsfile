@@ -1,5 +1,8 @@
 pipeline {
   agent any
+    tools {
+        jdk 'jdk17'
+    }
 
   environment {
     DOCKERHUB_CREDENTIALS = credentials('ae798623-fda7-4c12-9b30-89db69efe0e7')
@@ -9,7 +12,7 @@ pipeline {
   stages {
     stage('Clone Repository') {
       steps {
-        git 'https://github.com/your-username/streaming-app.git'
+        git branch: 'main', credentialsId: '9a318c7f-5810-483f-90e9-5332b135bdce', url: 'https://github.com/maazmohemmed/Jenkins_StreamPlatform'
       }
     }
 
@@ -26,7 +29,8 @@ pipeline {
     stage('Build Backend') {
       steps {
         dir('backend') {
-          sh 'mvn clean install'
+          sh 'mvn clean package -DskipTests'
+          sh 'cp target/streaming-1.0.0.war target/streaming.war'
         }
       }
     }
@@ -53,8 +57,8 @@ pipeline {
 
     stage('Deploy Containers') {
       steps {
-        sh 'docker-compose down || true'
-        sh 'docker-compose up -d'
+        sh '/usr/bin/docker compose down'
+        sh '/usr/bin/docker compose up -d'
       }
     }
 
