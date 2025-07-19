@@ -1,14 +1,14 @@
 version: '3.8'
 services:
   frontend:
-    image: your-dockerhub-username/frontend:latest
+    image: maazmohemmed/frontend:latest
     ports:
       - "80:80"
     networks:
       - app-network
 
   backend:
-    image: your-dockerhub-username/backend:latest
+    image: maazmohemmed/backend:latest
     ports:
       - "8080:8080"
     volumes:
