@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  frontend:
+    image: your-dockerhub-username/frontend:latest
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+  backend:
+    image: your-dockerhub-username/backend:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/videos:/usr/local/tomcat/videos
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
