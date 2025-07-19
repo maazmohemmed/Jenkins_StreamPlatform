@@ -10,7 +10,7 @@ services:
   backend:
     image: maazmohemmed/backend:latest
     ports:
-      - "8080:8080"
+      - "8081:8080"
     volumes:
       - ./backend/videos:/usr/local/tomcat/videos
     networks:
